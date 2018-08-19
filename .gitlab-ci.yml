@@ -1,5 +1,5 @@
 lint_dockerfile:
-  stage: lint
+  stage: test
   image: hadolint/hadolint:latest-debian
   script:
     - find . -name "Dockerfile" -execdir hadolint {} \;
