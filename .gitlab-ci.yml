@@ -14,7 +14,8 @@ lint_dockerfile:
   stage: test
   image: hadolint/hadolint:latest-debian
   before_script:
-    - date
+    - mkdir ~/.config
+    - cp ./.hadolint.yaml ~/.config/hadolint.yaml
   script:
     - find . -name "Dockerfile" -execdir hadolint {} \;
 
