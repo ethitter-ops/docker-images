@@ -1,5 +1,29 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
 lint_dockerfile:
   stage: test
   image: hadolint/hadolint:latest-debian
   script:
     - find . -name "Dockerfile" -execdir hadolint {} \;
+
+build-golang-master:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY/docker/images/golang:latest" ./golang/latest
+    - docker push "$CI_REGISTRY/docker/images/golang:latest"
+  only:
+    - master
+
+build-golang-dev:
+  stage: build
+  script:
+    - docker build --pull -t "$CI_REGISTRY/docker/images/golang:$CI_COMMIT_REF_SLUG" ./golang/latest
+#    - docker push "$CI_REGISTRY/docker/images/golang:$CI_COMMIT_REF_SLUG"
+  except:
+    - master
