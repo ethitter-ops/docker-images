@@ -13,6 +13,8 @@ before_script:
 lint_dockerfile:
   stage: test
   image: hadolint/hadolint:latest-debian
+  before_script:
+    - date
   script:
     - find . -name "Dockerfile" -execdir hadolint {} \;
 
