@@ -4,4 +4,4 @@ A collection of images used with GitLab CI, built using GitLab CI. ♾
 
 ## Use
 
-See this project's container registry.
+See this project's container registry for available images.
