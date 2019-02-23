@@ -1,5 +1,153 @@
+image: docker:latest
+
+services:
+  - docker:dind
+
+before_script:
+  - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
+
+#
+# TESTS
+#
+
 lint_dockerfile:
   stage: test
   image: hadolint/hadolint:latest-debian
+  before_script:
+    - mkdir ~/.config
+    - cp ./.hadolint.yaml ~/.config/hadolint.yaml
   script:
     - find . -name "Dockerfile" -execdir hadolint {} \;
+
+#
+# IMAGE BUILDS/PUSHES
+#
+
+# Golang
+build-golang-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/golang:latest" ./golang/latest
+    - docker push "$CI_REGISTRY_IMAGE/golang:latest"
+  only:
+    - master
+  when: manual
+
+build-golang-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/golang:latest-dev" ./golang/latest
+    - docker push "$CI_REGISTRY_IMAGE/golang:latest-dev"
+  except:
+    - master
+
+# PHP 7.3
+build-php-7.3-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.3" ./php/7.3
+    - docker push "$CI_REGISTRY_IMAGE/php:7.3"
+  only:
+    - master
+  when: manual
+
+build-php-7.3-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.3-dev" ./php/7.3
+    - docker push "$CI_REGISTRY_IMAGE/php:7.3-dev"
+  except:
+    - master
+
+# PHP 7.2
+build-php-7.2-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.2" ./php/7.2
+    - docker push "$CI_REGISTRY_IMAGE/php:7.2"
+  only:
+    - master
+  when: manual
+
+build-php-7.2-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.2-dev" ./php/7.2
+    - docker push "$CI_REGISTRY_IMAGE/php:7.2-dev"
+  except:
+    - master
+
+# PHP 7.1
+build-php-7.1-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.1" ./php/7.1
+    - docker push "$CI_REGISTRY_IMAGE/php:7.1"
+  only:
+    - master
+  when: manual
+
+build-php-7.1-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.1-dev" ./php/7.1
+    - docker push "$CI_REGISTRY_IMAGE/php:7.1-dev"
+  except:
+    - master
+
+# PHP 7.0
+build-php-7.0-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.0" ./php/7.0
+    - docker push "$CI_REGISTRY_IMAGE/php:7.0"
+  only:
+    - master
+  when: manual
+
+build-php-7.0-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:7.0-dev" ./php/7.0
+    - docker push "$CI_REGISTRY_IMAGE/php:7.0-dev"
+  except:
+    - master
+  allow_failure: true
+
+# PHP 5.6
+build-php-5.6-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:5.6" ./php/5.6
+    - docker push "$CI_REGISTRY_IMAGE/php:5.6"
+  only:
+    - master
+  when: manual
+
+build-php-5.6-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:5.6-dev" ./php/5.6
+    - docker push "$CI_REGISTRY_IMAGE/php:5.6-dev"
+  except:
+    - master
+  allow_failure: true
+
+# PHP 5.3
+build-php-5.3-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:5.3" ./php/5.3
+    - docker push "$CI_REGISTRY_IMAGE/php:5.3"
+  only:
+    - master
+  when: manual
+
+build-php-5.3-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/php:5.3-dev" ./php/5.3
+    - docker push "$CI_REGISTRY_IMAGE/php:5.3-dev"
+  except:
+    - master
+  allow_failure: true
