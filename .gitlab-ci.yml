@@ -16,13 +16,15 @@ build-golang-master:
   stage: build
   script:
     - docker build --pull -t "$CI_REGISTRY/docker/images/golang:latest" ./golang/latest
-    - docker push "$CI_REGISTRY/docker/images/golang:latest"
+#    - docker push "$CI_REGISTRY/docker/images/golang:latest"
   only:
     - master
 
 build-golang-dev:
   stage: build
   script:
+    - echo $CI_REGISTRY_IMAGE
+    - echo $CI_REGISTRY
     - docker build --pull -t "$CI_REGISTRY/docker/images/golang:$CI_COMMIT_REF_SLUG" ./golang/latest
 #    - docker push "$CI_REGISTRY/docker/images/golang:$CI_COMMIT_REF_SLUG"
   except:
