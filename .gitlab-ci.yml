@@ -10,7 +10,7 @@ before_script:
 # TESTS
 #
 
-lint_dockerfile:
+lint-dockerfile:
   stage: test
   image: hadolint/hadolint:latest-debian
   before_script:
@@ -18,6 +18,14 @@ lint_dockerfile:
     - cp ./.hadolint.yaml ~/.config/hadolint.yaml
   script:
     - find . -name "Dockerfile" -execdir hadolint {} \;
+
+lint-shell-script:
+  stage: test
+  image: koalaman/shellcheck-alpine:latest
+  before_script:
+    - shellcheck -V
+  script:
+    - find . -name "*.sh" -exec shellcheck {} \;
 
 #
 # IMAGE BUILDS/PUSHES
@@ -38,6 +46,24 @@ build-golang-dev:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/golang:latest-dev" ./golang/latest
     - docker push "$CI_REGISTRY_IMAGE/golang:latest-dev"
+  except:
+    - master
+
+# Debian Jessie builds
+build-debian-jessie-build-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:jessie" ./debian/jessie
+    - docker push "$CI_REGISTRY_IMAGE/debian:jessie"
+  only:
+    - master
+  when: manual
+
+build-debian-jessie-build-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:jessie-dev" ./debian/jessie
+    - docker push "$CI_REGISTRY_IMAGE/debian:jessie-dev"
   except:
     - master
 
