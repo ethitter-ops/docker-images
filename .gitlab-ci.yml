@@ -48,6 +48,24 @@ build-golang-dev:
     - docker push "$CI_REGISTRY_IMAGE/golang:latest-dev"
   except:
     - master
+     
+# Debian Stretch builds
+build-debian-stretch-build-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:stretch" ./debian/stretch
+    - docker push "$CI_REGISTRY_IMAGE/debian:stretch"
+  only:
+    - master
+  when: manual
+
+build-debian-stretch-build-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:stretch-dev" ./debian/stretch
+    - docker push "$CI_REGISTRY_IMAGE/debian:stretch-dev"
+  except:
+    - master
 
 # Debian Jessie builds
 build-debian-jessie-build-master:
