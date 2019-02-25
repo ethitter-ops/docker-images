@@ -48,6 +48,24 @@ build-golang-dev:
     - docker push "$CI_REGISTRY_IMAGE/golang:latest-dev"
   except:
     - master
+
+# Debian Stretch builds
+build-debian-buster-build-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:buster" ./debian/buster
+    - docker push "$CI_REGISTRY_IMAGE/debian:buster"
+  only:
+    - master
+  when: manual
+
+build-debian-buster-build-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:buster-dev" ./debian/buster
+    - docker push "$CI_REGISTRY_IMAGE/debian:buster-dev"
+  except:
+    - master
      
 # Debian Stretch builds
 build-debian-stretch-build-master:
