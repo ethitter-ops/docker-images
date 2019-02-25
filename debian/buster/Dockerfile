@@ -1,9 +1,9 @@
-FROM debian:stretch
+FROM debian:buster
 
 LABEL maintainer="ethitter"
 LABEL version="1.0"
 
-RUN echo "deb http://security.debian.org/ stretch/updates main" >> /etc/apt/sources.list
+RUN echo "deb http://security.debian.org/ buster/updates main" >> /etc/apt/sources.list
 
 RUN apt-get update \
     && apt-get -y --no-install-recommends install \
