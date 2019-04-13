@@ -7,7 +7,7 @@ LABEL version="1.0"
 # Install golint
 ENV GOPATH /go
 ENV PATH ${GOPATH}/bin:$PATH
-RUN go get -u github.com/golang/lint/golint
+RUN go get -u golang.org/x/lint/golint
 
 # Add apt key for LLVM repository
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
