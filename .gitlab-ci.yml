@@ -49,7 +49,7 @@ build-golang-dev:
   except:
     - master
 
-# Debian Stretch builds
+# Debian Busters builds
 build-debian-buster-build-master:
   stage: deploy
   script:
@@ -66,7 +66,7 @@ build-debian-buster-build-dev:
     - docker push "$CI_REGISTRY_IMAGE/debian:buster-dev"
   except:
     - master
-     
+
 # Debian Stretch builds
 build-debian-stretch-build-master:
   stage: deploy
@@ -100,6 +100,24 @@ build-debian-jessie-build-dev:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:jessie-dev" ./debian/jessie
     - docker push "$CI_REGISTRY_IMAGE/debian:jessie-dev"
+  except:
+    - master
+
+# Debian WP.org Plugin deploy builds
+build-debian-wp-org-deploy-build-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:wp-org-deploy" ./debian/wp-org-deploy
+    - docker push "$CI_REGISTRY_IMAGE/debian:wp-org-deploy"
+  only:
+    - master
+  when: manual
+
+build-debian-wp-org-deploy-build-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:wp-org-deploy-dev" ./debian/wp-org-deploy
+    - docker push "$CI_REGISTRY_IMAGE/debian:wp-org-deploy-dev"
   except:
     - master
 
