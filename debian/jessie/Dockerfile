@@ -1,4 +1,4 @@
-FROM debian:jessie
+FROM debian:jessie-slim
 
 LABEL maintainer="ethitter"
 LABEL version="1.0"

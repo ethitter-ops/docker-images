@@ -1,4 +1,4 @@
-FROM debian:stretch
+FROM debian:stretch-slim
 
 LABEL maintainer="ethitter"
 LABEL version="1.0"
