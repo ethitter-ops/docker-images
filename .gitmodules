@@ -1,3 +1,0 @@
-[submodule "debian/wp-org-deploy"]
-	path = debian/wp-org-deploy
-	url = git@git.ethitter.com:docker/wp-org-plugin-deploy.git
