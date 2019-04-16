@@ -49,7 +49,7 @@ build-golang-dev:
   except:
     - master
 
-# Debian Busters builds
+# Debian Buster builds
 build-debian-buster-build-master:
   stage: deploy
   script:
