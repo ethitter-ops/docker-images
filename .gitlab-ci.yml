@@ -1,5 +1,8 @@
 image: docker:latest
 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
 services:
   - docker:dind
 
@@ -100,6 +103,24 @@ build-debian-jessie-build-dev:
   script:
     - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:jessie-dev" ./debian/jessie
     - docker push "$CI_REGISTRY_IMAGE/debian:jessie-dev"
+  except:
+    - master
+
+# Debian WP.org Plugin deploy builds
+build-debian-wp-org-deploy-build-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:wp-org-deploy" ./debian/wp-org-deploy/context
+    - docker push "$CI_REGISTRY_IMAGE/debian:wp-org-deploy"
+  only:
+    - master
+  when: manual
+
+build-debian-wp-org-deploy-build-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:wp-org-deploy-dev" ./debian/wp-org-deploy/context
+    - docker push "$CI_REGISTRY_IMAGE/debian:wp-org-deploy-dev"
   except:
     - master
 
