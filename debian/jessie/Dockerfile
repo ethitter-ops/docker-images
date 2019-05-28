@@ -21,5 +21,8 @@ RUN apt-get update \
         libz-dev \
         gnupg \
         libssl-dev \
+        devscripts \
+        lintian \
+        fakeroot \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
