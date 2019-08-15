@@ -11,7 +11,7 @@ RUN go get -u golang.org/x/lint/golint
 
 # Install clang
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    clang-7.0 \
+    clang \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
