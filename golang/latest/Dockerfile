@@ -9,6 +9,13 @@ ENV GOPATH /go
 ENV PATH ${GOPATH}/bin:$PATH
 RUN go get -u golang.org/x/lint/golint
 
+# Install requirement to import LLVM key
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gnupg2 \
+    wget \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 # Add apt key for LLVM repository
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN wget -O - https://apt.llvm.org/llvm-snapshot.gpg.key | apt-key add -
