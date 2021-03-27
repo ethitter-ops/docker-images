@@ -4,7 +4,7 @@ LABEL maintainer="ethitter"
 LABEL version="1.0"
 
 RUN apt-get update \
-    && apt-get -yqqf install lsb-release zip unzip rsync subversion git mysql-client libicu-dev libpng-dev libbz2-dev default-libmysqlclient-dev libzip-dev --fix-missing --no-install-recommends \
+    && apt-get -yqqf install lsb-release zip unzip rsync subversion git libicu-dev libpng-dev libbz2-dev default-libmysqlclient-dev libzip-dev --fix-missing --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
