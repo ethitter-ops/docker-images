@@ -1,4 +1,4 @@
-FROM debian:bulleye-slim
+FROM debian:bullseye-slim
 
 LABEL maintainer="ethitter"
 LABEL version="1.0"
