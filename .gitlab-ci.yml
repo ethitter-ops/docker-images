@@ -49,6 +49,24 @@ build-golang-dev:
   except:
     - master
 
+# Debian Bullseye builds
+build-debian-bullseye-build-master:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:bullseye" ./debian/bullseye
+    - docker push "$CI_REGISTRY_IMAGE/debian:bullseye"
+  only:
+    - master
+  when: manual
+
+build-debian-bullseye-build-dev:
+  stage: deploy
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE/debian:bullseye-dev" ./debian/bullseye
+    - docker push "$CI_REGISTRY_IMAGE/debian:bullseye-dev"
+  except:
+    - master
+
 # Debian Buster builds
 build-debian-buster-build-master:
   stage: deploy
