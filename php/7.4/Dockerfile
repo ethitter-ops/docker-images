@@ -1,4 +1,4 @@
-FROM php:7.4-buster
+FROM php:7.4-bullseye
 
 LABEL maintainer="ethitter"
 LABEL version="1.0"

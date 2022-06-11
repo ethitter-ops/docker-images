@@ -1,4 +1,4 @@
-FROM php:7.2-stretch
+FROM php:7.2-buster
 
 LABEL maintainer="ethitter"
 LABEL version="1.0"

@@ -1,4 +1,4 @@
-FROM php:7.3-stretch
+FROM php:7.3-bullseye
 
 LABEL maintainer="ethitter"
 LABEL version="1.0"
