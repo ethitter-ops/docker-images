@@ -7,7 +7,7 @@ LABEL version="1.0"
 # Install golint
 ENV GOPATH /go
 ENV PATH ${GOPATH}/bin:$PATH
-RUN go get -u golang.org/x/lint/golint
+RUN go install golang.org/x/lint/golint@latest
 
 # Install clang
 RUN apt-get update && apt-get install -y --no-install-recommends \
