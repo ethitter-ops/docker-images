@@ -35,7 +35,9 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && chmod +x /usr/local/bin/composer \
     && composer --version \
+    && mkdir $NVM_DIR \
     && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash \
+    && . $NVM_DIR/nvm.sh \
     && nvm --version
 
 ENV PATH=/root/.composer/vendor/bin:$HOME/.composer/vendor/bin:$PATH
