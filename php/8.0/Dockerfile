@@ -10,7 +10,6 @@ RUN apt-get update \
 
 RUN docker-php-ext-install mbstring mysqli intl gd zip bz2 \
     && pecl install xdebug \
-    && phpdismod xdebug \
     && php -i
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
