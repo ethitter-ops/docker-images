@@ -10,7 +10,8 @@ RUN apt-get update \
 
 RUN docker-php-ext-install mbstring mysqli intl gd zip bz2 \
     && pecl install xdebug \
-    && sudo phpdismod xdebug
+    && phpdismod xdebug \
+    && php -i
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
