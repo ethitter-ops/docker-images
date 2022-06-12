@@ -32,6 +32,8 @@ RUN docker-php-ext-install \
     && pecl install xdebug \
     && php -m
 
+ENV NVM_DIR /usr/local/nvm
+
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
     && chmod +x /usr/local/bin/composer \

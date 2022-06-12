@@ -268,7 +268,6 @@ build-php-7.0-dev:
     - docker push "$CI_REGISTRY_IMAGE/php:7.0-dev"
   except:
     - master
-  allow_failure: true
 
 # PHP 5.6
 build-php-5.6-master:
@@ -287,4 +286,3 @@ build-php-5.6-dev:
     - docker push "$CI_REGISTRY_IMAGE/php:5.6-dev"
   except:
     - master
-  allow_failure: true
