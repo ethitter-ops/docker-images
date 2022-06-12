@@ -34,6 +34,9 @@ RUN docker-php-ext-install \
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && chmod +x /usr/local/bin/composer
+    && chmod +x /usr/local/bin/composer \
+    && composer --version \
+    && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash \
+    && nvm --version
 
 ENV PATH=/root/.composer/vendor/bin:$HOME/.composer/vendor/bin:$PATH
