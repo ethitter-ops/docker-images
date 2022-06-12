@@ -29,7 +29,6 @@ RUN docker-php-ext-install \
       gd \
       zip \
       bz2 \
-    && pecl install xdebug \
     && php -m
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
